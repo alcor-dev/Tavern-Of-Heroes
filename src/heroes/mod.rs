@@ -88,9 +88,15 @@ pub(crate) mod Heroes {
                 _ => String::from("Another class"),
             };
 
-            println!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHP: {}\nMana: {}", name, race_txt, weapon_txt, class_txt, hp, mana);
+            println!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHP: {}\nMana: {}\n\n", name, race_txt, weapon_txt, class_txt, hp, mana);
 
         }
+
+        pub fn get_hero_name(&self) -> String {
+            let Hero{name, ..} = self;
+            String::from(name)
+        }
+
     }
     
 }

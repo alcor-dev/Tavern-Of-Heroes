@@ -1,27 +1,38 @@
 use heroes::Heroes::{Race, Weapon, Class};
 
 use crate::heroes::Heroes::Hero;
+use crate::tavern::tavern::Tavern;
 
 pub mod heroes;
+pub mod tavern;
 
 fn main() {
+
     //Creador chorra de personajes en Rust
     let first_hero = Hero::new(String::from("Thrall"), Race::Orc, Weapon::Hammer, Class::Warrior);
     let second_hero = Hero::new(String::from("Drizzt"), Race::Elf, Weapon::Daggers, Class::Rogue);
+    let third_hero = Hero::new(String::from("Althael"), Race::Demon, Weapon::Magic, Class::Nechromancer);
     println!("{:?}", &first_hero);
 
-    first_hero.describe();
+    //Muestra la info del personaje elegido
+    first_hero.describe();    
 
-    let mut tabern = Vec::new();
+    //Creamos una taberna modificable
+    let mut dark_tavern = Tavern::new(String::from("Dark Tavern"));
 
-    tabern.push(first_hero);
-    tabern.push(second_hero);
+    //Añadimos héroes o villanos
+    dark_tavern.add(first_hero);
+    dark_tavern.add(second_hero);
+    dark_tavern.add(third_hero);
 
-    for hero in tabern.iter_mut() {
-        println!("{:?}", hero)
-    }
+    //Pedimos que muestre los personajes con un formateo propio
+    dark_tavern.show_heroes();
 
-    println!("{:?}", &tabern[0]);
-    println!("{:?}", &tabern[1]);
+    //Echamos a uno de los héroes porque siempre gorronea (incluso incluimos motivos!)
+    dark_tavern.kick_hero(String::from("Althael"), String::from("Gorronear y nunca pagar"));
+
+    //Mostramos que de verdad ha sido echado de la taberna
+    dark_tavern.show_heroes();
+
+    println!("{:?}", dark_tavern);
 }
-

@@ -39,6 +39,19 @@ pub(crate) mod tavern {
 
         pub fn kick_hero(&mut self, name: String, kick_motive: String) {
             
+            //Este código es mucho más óptimo que el que había pensado
+            //pide que se remueva algo y para ello dentro del remove de la lista
+            // 1 - Lo va iterando
+            // 2 - Se queda la posición
+            // 3 - El predicado (con closures crea una comparativa al instante y devuelve incluso mensaje de error);
+            //con lo que coge la posición del index exacto donde hay un caso positivo dentro de una sola línea
+            //genio de idea
+            self.people.remove(self.people.iter().position(|hero| *hero.get_hero_name() == name).expect("Héroe no encontrado"));
+
+
+            //funciona pero no es tan óptimo y gasta más recursos
+
+            /* 
             let mut counter = 0;
             let mut exact_position = 0;
             for hero in self.people.iter_mut() {
@@ -47,12 +60,11 @@ pub(crate) mod tavern {
                 } else {
                     counter += 1;
                 }
-
             }
 
             if exact_position >= 0 {
                 self.people.remove(exact_position);
-            }
+            }*/
 
             println!("El héroe {} ha sido echado por: {}", name, kick_motive);
             

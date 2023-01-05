@@ -35,4 +35,5 @@ fn main() {
     dark_tavern.show_heroes();
 
     println!("{:?}", dark_tavern);
+    
 }

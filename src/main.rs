@@ -1,5 +1,3 @@
-use heroes::Heroes::{Race, Weapon, Class};
-
 use crate::heroes::Heroes::Hero;
 use crate::tavern::tavern::Tavern;
 
@@ -19,7 +17,7 @@ fn main() {
     first_hero.describe();    
 
     //Creamos una taberna modificable
-    let mut dark_tavern = Tavern::new(String::from("Dark Tavern"));
+    let mut dark_tavern = Tavern::new("Dark Tavern");
 
     //Añadimos héroes o villanos
     dark_tavern.add(first_hero);

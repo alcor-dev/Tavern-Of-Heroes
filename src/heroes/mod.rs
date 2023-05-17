@@ -1,6 +1,4 @@
 pub(crate) mod Heroes {
-    use std::char::ToLowercase;
-
 
     #[derive(Debug)]
     pub enum Race {

@@ -9,9 +9,9 @@ pub(crate) mod tavern {
     }
 
     impl Tavern {
-        pub fn new(name: String) -> Self {
+        pub fn new(name: &str) -> Self {
             Self {
-                name,
+                name: String::from(name),
                 people: Vec::new(),
             }
         }

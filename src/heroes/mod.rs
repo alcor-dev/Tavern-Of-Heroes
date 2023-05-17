@@ -1,4 +1,6 @@
 pub(crate) mod Heroes {
+    use std::char::ToLowercase;
+
 
     #[derive(Debug)]
     pub enum Race {
@@ -36,23 +38,53 @@ pub(crate) mod Heroes {
         mana: u64,
     }
 
-    fn check_class(&class: &Class) -> (u64, u64) {
-        match &class {
-            &Class::Mage => (250, 1000),
-            &Class::Warrior => (1000, 100),
-            &Class::Rogue => (500, 500),
-            &Class::Nechromancer => (100, 1000),
+    fn check_class(class: &str) -> (u64, u64) {
+        match class {
+            "mage" => (250, 1000),
+            "warrior" => (1000, 100),
+            "rogue" => (500, 500),
+            "nechromancer" => (100, 1000),
+            &_ => (0,0),
         }
     }
 
     impl Hero {
-        pub fn new(name: String, race: Race, weapon: Weapon, class: Class) -> Self {
+        pub fn new(name: &str, race: &str, weapon: &str, class: &str) -> Self {
+            
+
+            let enum_race = match race {
+                "human" => Race::Human, 
+                "orc" => Race::Orc,
+                "demon" => Race::Demon,
+                "elf" => Race::Elf,
+                &_ => todo!(),
+            };
+
+            let enum_weapon = match weapon {
+                "sword" => Weapon::Sword,
+                "spear" => Weapon::Spear,
+                "magic" => Weapon::Magic,
+                "mace" => Weapon::Mace,
+                "daggers" => Weapon::Daggers,
+                "hammer" => Weapon::Hammer,
+                &_ => todo!(),  
+            };
+
+            let enum_class = match class {
+                "mage" => Class::Mage,
+                "warrior" => Class::Warrior,
+                "nechromancer" => Class::Nechromancer,
+                "rogue" => Class::Rogue,
+                &_ => todo!(),
+            };
+
             let (hp, mana) = check_class(&class);
+
             Self {
-                name,
-                race,
-                weapon,
-                class,
+                name: String::from(name),
+                race: enum_race,
+                weapon: enum_weapon,
+                class: enum_class,
                 hp,
                 mana,
             }

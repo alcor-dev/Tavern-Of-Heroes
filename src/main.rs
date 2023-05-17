@@ -9,9 +9,9 @@ pub mod tavern;
 fn main() {
 
     //Creador chorra de personajes en Rust
-    let first_hero = Hero::new(String::from("Thrall"), Race::Orc, Weapon::Hammer, Class::Warrior);
-    let second_hero = Hero::new(String::from("Drizzt"), Race::Elf, Weapon::Daggers, Class::Rogue);
-    let third_hero = Hero::new(String::from("Althael"), Race::Demon, Weapon::Magic, Class::Nechromancer);
+    let first_hero = Hero::new("Thrall", "orc", "hammer", "warrior");
+    let second_hero = Hero::new("Drizzt", "elf", "daggers", "rogue");
+    let third_hero = Hero::new("Althael", "demon", "magic", "nechromancer");
 
     println!("{:#?}", &first_hero);
 

@@ -1,5 +1,3 @@
-pub(crate) mod Heroes {
-
     #[derive(Debug)]
     pub enum Race {
         Human,
@@ -128,5 +126,3 @@ pub(crate) mod Heroes {
         }
 
     }
-    
-}

@@ -1,8 +1,8 @@
-use crate::heroes::Heroes::Hero;
-use crate::tavern::tavern::Tavern;
+use crate::heroes::*;
+use crate::tavern::*;
 
-pub mod heroes;
-pub mod tavern;
+mod heroes;
+mod tavern;
 
 fn main() {
 

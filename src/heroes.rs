@@ -1,4 +1,6 @@
-#[derive(Debug)]
+use serde::{Serialize, Deserialize};
+ 
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Race {
     Human,
     Orc,
@@ -6,7 +8,7 @@ pub enum Race {
     Elf,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Weapon {
     Sword,
     Spear,
@@ -16,7 +18,7 @@ pub enum Weapon {
     Hammer,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Class {
     Mage,
     Warrior,
@@ -24,7 +26,7 @@ pub enum Class {
     Nechromancer,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Hero {
     name: String,
     race: Race,

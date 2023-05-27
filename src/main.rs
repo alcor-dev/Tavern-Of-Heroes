@@ -35,4 +35,6 @@ fn main() {
 
     println!("{:#?}", dark_tavern);
 
+    dark_tavern.write_json_tavern();
+
 }

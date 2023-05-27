@@ -16,6 +16,7 @@ pub enum Weapon {
     Mace,
     Daggers,
     Hammer,
+    Hands,
 }
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
@@ -24,6 +25,8 @@ pub enum Class {
     Warrior,
     Rogue,
     Nechromancer,
+    Fighter,
+    Karate,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -42,6 +45,8 @@ fn check_class(class: &str) -> (u64, u64) {
         "warrior" => (1000, 100),
         "rogue" => (500, 500),
         "nechromancer" => (100, 1000),
+        "karate" => (5000, 0),
+        "fighter" => (2000, 50),
         &_ => (0,0),
     }
 }
@@ -65,12 +70,15 @@ impl Hero {
             "mace" => Weapon::Mace,
             "daggers" => Weapon::Daggers,
             "hammer" => Weapon::Hammer,
+            "hands" => Weapon::Hands,
             &_ => todo!(),  
         };
 
         let enum_class = match class {
             "mage" => Class::Mage,
             "warrior" => Class::Warrior,
+            "fighter" => Class::Fighter,
+            "karate" => Class::Karate,
             "nechromancer" => Class::Nechromancer,
             "rogue" => Class::Rogue,
             &_ => todo!(),
@@ -101,11 +109,13 @@ impl Hero {
 
         let weapon_txt = match &weapon {
             Weapon::Daggers => String::from("Daggers"),
+            Weapon::Hands => String::from("Hands"),
             Weapon::Hammer => String::from("Hammer"),
             Weapon::Mace => String::from("Mace"),
             Weapon::Magic => String::from("Magic"),
             Weapon::Spear => String::from("Spear"),
             Weapon::Sword => String::from("Sword"),
+            
         };
 
         let class_txt = match &class {
@@ -113,6 +123,8 @@ impl Hero {
             Class::Nechromancer => String::from("Nechromancer"),
             Class::Rogue => String::from("Rogue"),
             Class::Warrior => String::from("Warrior"),
+            Class::Fighter => String::from("Fighter"),
+            Class::Karate => String::from("Karate Master")
         };
 
         println!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHP: {}\nMana: {}\n\n", name, race_txt, weapon_txt, class_txt, hp, mana);

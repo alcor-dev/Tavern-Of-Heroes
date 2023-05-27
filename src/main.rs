@@ -10,6 +10,7 @@ fn main() {
     let first_hero = Hero::new("Thrall", "orc", "hammer", "warrior");
     let second_hero = Hero::new("Drizzt", "elf", "daggers", "rogue");
     let third_hero = Hero::new("Althael", "demon", "magic", "nechromancer");
+    let fourth_hero = Hero::new("Myst", "demon", "hands", "karate");
 
     println!("{:#?}", &first_hero);
 
@@ -23,6 +24,7 @@ fn main() {
     dark_tavern.add(first_hero);
     dark_tavern.add(second_hero);
     dark_tavern.add(third_hero);
+    dark_tavern.add(fourth_hero);
 
     //Pedimos que muestre los personajes con un formateo propio
     dark_tavern.show_heroes();

@@ -97,7 +97,6 @@ impl Hero {
             Race::Elf => String::from("Elf"),
             Race::Human => String::from("Human"),
             Race::Orc => String::from("Orc"),
-            _ => String::from("Another race"),
         };
 
         let weapon_txt = match &weapon {
@@ -107,7 +106,6 @@ impl Hero {
             Weapon::Magic => String::from("Magic"),
             Weapon::Spear => String::from("Spear"),
             Weapon::Sword => String::from("Sword"),
-            _ => String::from("Another weapon"),
         };
 
         let class_txt = match &class {
@@ -115,7 +113,6 @@ impl Hero {
             Class::Nechromancer => String::from("Nechromancer"),
             Class::Rogue => String::from("Rogue"),
             Class::Warrior => String::from("Warrior"),
-            _ => String::from("Another class"),
         };
 
         println!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHP: {}\nMana: {}\n\n", name, race_txt, weapon_txt, class_txt, hp, mana);

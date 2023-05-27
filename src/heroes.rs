@@ -12,6 +12,7 @@ pub enum Race {
 pub enum Weapon {
     Sword,
     Spear,
+    Scepter,
     Magic,
     Mace,
     Daggers,
@@ -27,6 +28,7 @@ pub enum Class {
     Nechromancer,
     Fighter,
     Karate,
+    Healer,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -41,6 +43,7 @@ pub struct Hero {
 
 fn check_class(class: &str) -> (u64, u64) {
     match class {
+        "healer" => (200, 3000),
         "mage" => (250, 1000),
         "warrior" => (1000, 100),
         "rogue" => (500, 500),
@@ -71,10 +74,12 @@ impl Hero {
             "daggers" => Weapon::Daggers,
             "hammer" => Weapon::Hammer,
             "hands" => Weapon::Hands,
+            "scepter" => Weapon::Scepter,
             &_ => todo!(),  
         };
 
         let enum_class = match class {
+            "healer" => Class::Healer,
             "mage" => Class::Mage,
             "warrior" => Class::Warrior,
             "fighter" => Class::Fighter,
@@ -115,6 +120,7 @@ impl Hero {
             Weapon::Magic => String::from("Magic"),
             Weapon::Spear => String::from("Spear"),
             Weapon::Sword => String::from("Sword"),
+            Weapon::Scepter => String::from("Scepter")
             
         };
 
@@ -124,7 +130,8 @@ impl Hero {
             Class::Rogue => String::from("Rogue"),
             Class::Warrior => String::from("Warrior"),
             Class::Fighter => String::from("Fighter"),
-            Class::Karate => String::from("Karate Master")
+            Class::Karate => String::from("Karate Master"),
+            Class::Healer => String::from("Healer")
         };
 
         println!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHP: {}\nMana: {}\n\n", name, race_txt, weapon_txt, class_txt, hp, mana);

@@ -3,7 +3,7 @@ use crate::heroes::*;
 #[derive(Debug)]
 pub struct Tavern {
     name: String,
-    people: Vec<Hero>,
+    pub people: Vec<Hero>,
 }
 
 impl Tavern {
@@ -66,6 +66,11 @@ impl Tavern {
 
         println!("\nEl héroe {} ha sido echado por: {}\n", name, kick_motive);
         
+    }
+
+    //Añadida capacidad de imprimir todo lo que contiene la taberna
+    pub fn write_json_tavern(&self) {    
+        std::fs::write("test.json", serde_json::to_string_pretty(&self.people).expect("Error"));
     }
 
 }

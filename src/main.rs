@@ -1,3 +1,6 @@
+use std::io;
+use std::io::Read;
+
 use crate::heroes::*;
 use crate::tavern::*;
 
@@ -28,6 +31,8 @@ fn main() {
     dark_tavern.add(fourth_hero);
     dark_tavern.add(fifth_hero);
 
+    //Creador automático de personajes
+    dark_tavern.create_characters();
 
     //Pedimos que muestre los personajes con un formateo propio
     dark_tavern.show_heroes();

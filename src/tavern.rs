@@ -46,8 +46,16 @@ impl Tavern {
         // 3 - El predicado (con closures crea una comparativa al instante y devuelve incluso mensaje de error);
         //con lo que coge la posición del index exacto donde hay un caso positivo dentro de una sola línea
         //genio de idea
-        self.people.remove(self.people.iter().position(|hero| hero.get_hero_name() == name).expect("Héroe no encontrado"));
+        let find_hero: Option<usize> = self.people.iter().position(|hero| hero.get_hero_name() == name);
 
+        match find_hero {
+            Some(usize) => {
+                self.people.remove(usize);
+                println!("\nEl héroe {} ha sido echado por: {}\n", name, kick_motive);
+                },
+            None => println!("No existe un héroe con ese nombre"),
+        };
+        //self.people.remove();
 
         //funciona pero no es tan óptimo y gasta más recursos
 
@@ -66,8 +74,14 @@ impl Tavern {
             self.people.remove(exact_position);
         }*/
 
-        println!("\nEl héroe {} ha sido echado por: {}\n", name, kick_motive);
         
+        
+    }
+
+    fn find_hero(&self, name: &str) -> Option<usize> {
+        //let hero = self.people.iter().position(|hero| hero.get_hero_name() == name);
+        let find_hero = self.people.iter().position(|hero| hero.get_hero_name() == name);
+        find_hero
     }
 
     //Añadida capacidad de imprimir todo lo que contiene la taberna
@@ -86,6 +100,8 @@ impl Tavern {
         let number_heroes = number_heroes.trim().parse::<u32>().expect("Error doing parsing");
     
         loop {
+
+            if number_heroes == 0 { break};
     
             println!("\n\nHero number: [{}]", counter);
     
@@ -108,7 +124,7 @@ impl Tavern {
             let new_hero = (Hero::new(name.trim(), race.trim(), weapon.trim(), class.trim()));
             self.people.push(new_hero);
             
-            if counter == number_heroes { break };
+            if counter >= number_heroes || number_heroes == counter { break };
             counter += 1;
 
         };

@@ -62,7 +62,7 @@ impl Hero {
     pub fn new(name: &str, race: &str, weapon: &str, class: &str) -> Self {
         
 
-        let enum_race = match race {
+        let enum_race = match race.to_lowercase().as_str() {
             "human" => Race::Human, 
             "orc" => Race::Orc,
             "demon" => Race::Demon,
@@ -72,7 +72,7 @@ impl Hero {
             &_ => todo!(),
         };
 
-        let enum_weapon = match weapon {
+        let enum_weapon = match weapon.to_lowercase().as_str() {
             "sword" => Weapon::Sword,
             "spear" => Weapon::Spear,
             "magic" => Weapon::Magic,
@@ -84,7 +84,7 @@ impl Hero {
             &_ => todo!(),  
         };
 
-        let enum_class = match class {
+        let enum_class = match class.to_lowercase().as_str() {
             "healer" => Class::Healer,
             "mage" => Class::Mage,
             "warrior" => Class::Warrior,

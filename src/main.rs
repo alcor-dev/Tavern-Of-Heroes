@@ -1,6 +1,3 @@
-use std::io;
-use std::io::Read;
-
 use crate::heroes::*;
 use crate::tavern::*;
 

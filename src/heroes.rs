@@ -1,5 +1,3 @@
-use std::io;
-
 use serde::{Serialize, Deserialize};
  
 #[derive(Debug, Serialize, Deserialize)]
@@ -61,7 +59,8 @@ fn check_class(class: &str) -> (u64, u64) {
 impl Hero {
     pub fn new(name: &str, race: &str, weapon: &str, class: &str) -> Self {
         
-
+        //usamos el to_lowercase, para convertir todo en minúsculas
+        //para acabar usando el as_str para convertirlo a &str
         let enum_race = match race.to_lowercase().as_str() {
             "human" => Race::Human, 
             "orc" => Race::Orc,

@@ -27,27 +27,20 @@ impl Tavern {
         }
     }
 
-    fn check_name(hero: &Hero, name: &String) -> bool {
-        let hero_name = hero.get_hero_name();
-        if hero_name == *name {
-            true
-        } else {
-            false
-        }
-        
-    }
-
     pub fn kick_hero(&mut self, name: &str, kick_motive: &str) {
         
         //Este código es mucho más óptimo que el que había pensado
         //pide que se remueva algo y para ello dentro del remove de la lista
-        // 1 - Lo va iterando
+        // 1 - Avanza sobre el código
         // 2 - Se queda la posición
-        // 3 - El predicado (con closures crea una comparativa al instante y devuelve incluso mensaje de error);
+        // 3 - El predicado (con closures crea una comparativa al instante y devuelve incluso mensaje de error)
         //con lo que coge la posición del index exacto donde hay un caso positivo dentro de una sola línea
         //genio de idea
+        //update: usando un Option, devolvemos la posición con un Some(usize) y en caso contrario con un None, evitando panics
         let find_hero: Option<usize> = self.people.iter().position(|hero| hero.get_hero_name() == name);
 
+        //Usamos un match para devolver un resultado u otro dependiendo de si encuentra algo o no, pero evitando el
+        //código haciendo PANIC
         match find_hero {
             Some(usize) => {
                 self.people.remove(usize);
@@ -55,27 +48,6 @@ impl Tavern {
                 },
             None => println!("No existe un héroe con ese nombre"),
         };
-        //self.people.remove();
-
-        //funciona pero no es tan óptimo y gasta más recursos
-
-        /* 
-        let mut counter = 0;
-        let mut exact_position = 0;
-        for hero in self.people.iter_mut() {
-            if Tavern::check_name(hero, &name) {
-                exact_position = counter;
-            } else {
-                counter += 1;
-            }
-        }
-
-        if exact_position >= 0 {
-            self.people.remove(exact_position);
-        }*/
-
-        
-        
     }
 
     fn find_hero(&self, name: &str) -> Option<usize> {
@@ -127,8 +99,6 @@ impl Tavern {
             if counter >= number_heroes || number_heroes == counter { break };
             counter += 1;
 
-        };
-        
+        };   
     }
-
 }

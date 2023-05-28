@@ -58,7 +58,7 @@ impl Tavern {
 
     //Añadida capacidad de imprimir todo lo que contiene la taberna
     pub fn write_json_tavern(&self) {    
-        std::fs::write("test.json", serde_json::to_string_pretty(&self.people).expect("Error"));
+        std::fs::write("dark_tavern.json", serde_json::to_string_pretty(&self.people).expect("Error"));
     }
 
     pub fn create_characters(&mut self) {

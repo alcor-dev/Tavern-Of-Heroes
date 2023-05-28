@@ -37,7 +37,8 @@ impl Tavern {
         //con lo que coge la posición del index exacto donde hay un caso positivo dentro de una sola línea
         //genio de idea
         //update: usando un Option, devolvemos la posición con un Some(usize) y en caso contrario con un None, evitando panics
-        let find_hero: Option<usize> = self.people.iter().position(|hero| hero.get_hero_name() == name);
+        //update 2: usamos una función para que la lectura sea aún más sencilla
+        let find_hero: Option<usize> = self.find_hero(name);
 
         //Usamos un match para devolver un resultado u otro dependiendo de si encuentra algo o no, pero evitando el
         //código haciendo PANIC
@@ -56,11 +57,12 @@ impl Tavern {
         find_hero
     }
 
-    //Añadida capacidad de imprimir todo lo que contiene la taberna
+    //Añadida capacidad de imprimir todos los personajes que contiene la taberna
     pub fn write_json_tavern(&self) {    
         std::fs::write("dark_tavern.json", serde_json::to_string_pretty(&self.people).expect("Error"));
     }
 
+    //Permite automatizar en gran medida la creación de personajes y actualización de la taberna
     pub fn create_characters(&mut self) {
 
         let mut counter: u32 = 1;
@@ -93,7 +95,7 @@ impl Tavern {
             let mut class = String::new();
             io::stdin().read_line(&mut class).expect("Error reading CLASS");
 
-            let new_hero = (Hero::new(name.trim(), race.trim(), weapon.trim(), class.trim()));
+            let new_hero = Hero::new(name.trim(), race.trim(), weapon.trim(), class.trim());
             self.people.push(new_hero);
             
             if counter >= number_heroes || number_heroes == counter { break };

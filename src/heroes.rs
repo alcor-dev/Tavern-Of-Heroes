@@ -1,3 +1,5 @@
+use std::io;
+
 use serde::{Serialize, Deserialize};
  
 #[derive(Debug, Serialize, Deserialize)]
@@ -6,6 +8,8 @@ pub enum Race {
     Orc,
     Demon,
     Elf,
+    Dwarf,
+    Goblin,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -63,6 +67,8 @@ impl Hero {
             "orc" => Race::Orc,
             "demon" => Race::Demon,
             "elf" => Race::Elf,
+            "dwarf" => Race::Dwarf,
+            "goblin" => Race::Goblin,
             &_ => todo!(),
         };
 
@@ -110,6 +116,8 @@ impl Hero {
             Race::Elf => String::from("Elf"),
             Race::Human => String::from("Human"),
             Race::Orc => String::from("Orc"),
+            Race::Dwarf => String::from("Dwarf"),
+            Race::Goblin => String::from("Goblin")
         };
 
         let weapon_txt = match &weapon {

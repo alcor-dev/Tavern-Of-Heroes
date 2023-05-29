@@ -39,6 +39,7 @@ impl Tavern {
         //con lo que coge la posición del index exacto donde hay un caso positivo dentro de una sola línea
         //genio de idea
         //update: usando un Option, devolvemos la posición con un Some(usize) y en caso contrario con un None, evitando panics
+        //update 2: usamos una función para que la lectura sea aún más sencilla
         let find_hero: Option<usize> = self.find_hero(name);
 
         //Usamos un match para devolver un resultado u otro dependiendo de si encuentra algo o no, pero evitando el
@@ -68,6 +69,7 @@ impl Tavern {
         }
     }
 
+    //Permite automatizar en gran medida la creación de personajes y actualización de la taberna
     pub fn create_characters(&mut self) {
 
         let mut counter: u32 = 1;

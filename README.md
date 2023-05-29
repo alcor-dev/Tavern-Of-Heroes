@@ -15,4 +15,4 @@ Intento ir incorporando la mayor cantidad posible de características que sean c
 
 - Ser capaz de cargar desde el inicio un JSON para crear de nuevo la "base de datos" y modificarla como se desee
 - Creación de conexiones a bases de datos: quizás a contenedores docker con PostgresSQL o MySQL
-- Ideas que vayan surgiendo al ir teniendo mayor dominio del lenguaje
+- Ideas que vayan surgiendo al ir teniendo mayor dominio del lenguaje y avance en mis experimentos sueltos.

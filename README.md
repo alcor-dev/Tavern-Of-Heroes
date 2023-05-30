@@ -1,4 +1,4 @@
-﻿# TavernOfHeroes
+﻿# Tavern Of Heroes
 
 Pequeño proyecto para aprender Rust en mayor profundidad usando la mayor cantidad de opciones posibles dentro del lenguaje intentando ser lo más idiomático posible y evitar construcciones que puedan resultar confusas.
 A grandes rasgos:

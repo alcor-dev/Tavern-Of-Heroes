@@ -40,6 +40,9 @@ fn main() {
     //Mostramos que de verdad ha sido echado de la taberna
     dark_tavern.show_heroes();
 
+    //uso de función genérica para llamar a todos los structs con el trait Nameable [ver heroes.rs]
+    say_name(&dark_tavern.heroes[0]);
+
     println!("{:#?}", dark_tavern);
 
     //Creamos un archivo con los héroes de la taberna

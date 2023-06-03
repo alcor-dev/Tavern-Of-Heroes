@@ -1,6 +1,6 @@
 use serde::{Serialize, Deserialize};
  
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Race {
     Human,
     Orc,
@@ -10,7 +10,7 @@ pub enum Race {
     Goblin,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Weapon {
     Sword,
     Spear,
@@ -54,6 +54,10 @@ fn check_class(class: &str) -> (u64, u64) {
         "fighter" => (2000, 50),
         &_ => (0,0),
     }
+}
+
+pub trait Nameable {
+    fn nameable(&self) -> &str;
 }
 
 impl Hero {
@@ -150,4 +154,15 @@ impl Hero {
         String::from(name)
     }
 
+}
+
+//Añadimos el trait nameable a la struct Hero
+impl Nameable for Hero {
+    fn nameable(&self) -> &str {
+        self.name.as_str()
+    }
+}
+
+pub fn say_name<T: Nameable>(item: &T) {
+    println!("Name of the hero is: {}", item.nameable())
 }

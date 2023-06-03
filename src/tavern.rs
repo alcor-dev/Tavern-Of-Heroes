@@ -1,5 +1,4 @@
 use std::{io};
-
 use serde::Serialize;
 
 use crate::heroes::*;
@@ -60,13 +59,16 @@ impl Tavern {
     }
 
     //Añadida capacidad de imprimir todo lo que contiene la taberna
-    pub fn write_json_tavern(&self) {
+    pub fn write_json_tavern(&self)  -> Result<(), io::Error>{
         let filename = "dark_tavern.json";    
-        let read = std::fs::write(&filename, serde_json::to_string_pretty(&self).unwrap());
-        match read {
+        let read = std::fs::write(&filename, serde_json::to_string_pretty(&self)?)?;
+        //al usar ? hacemos que Rust automáticamente gestione el procesado de los errores, en este caso, tanto serde_jason como write deben llevar uno cada uno
+        //en caso contrario, debería usar el código abajo escrito
+        /*match read {
             Ok(_) => println!("\nwriting of {} is successful", filename.to_uppercase()),
             Err(_) => println!("\nwriting has failed"),
-        }
+        }*/
+        Ok(read)
     }
 
     //Permite automatizar en gran medida la creación de personajes y actualización de la taberna

@@ -33,7 +33,7 @@ pub enum Class {
     Healer,
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Hero {
     name: String,
     race: Race,
@@ -163,6 +163,6 @@ impl Nameable for Hero {
     }
 }
 
-pub fn say_name<T: Nameable>(item: &T) {
+pub fn say_name<T: Nameable>(item: T) {
     println!("Name of the hero is: {}", item.nameable())
 }

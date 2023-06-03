@@ -41,7 +41,8 @@ fn main() {
     dark_tavern.show_heroes();
 
     //uso de función genérica para llamar a todos los structs con el trait Nameable [ver heroes.rs]
-    say_name(&dark_tavern.heroes[0]);
+    //update: usando clone, podemos hacer una copia que se consuma en lugar del original
+    say_name(dark_tavern.heroes[0].clone());
 
     println!("{:#?}", dark_tavern);
 

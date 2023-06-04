@@ -47,6 +47,6 @@ fn main() {
     println!("{:#?}", dark_tavern);
 
     //Creamos un archivo con los héroes de la taberna
-    dark_tavern.write_json_tavern();
+    dark_tavern.write_json_tavern().expect("Error");
 
 }

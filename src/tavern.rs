@@ -63,7 +63,7 @@ impl Tavern {
         let filename = "dark_tavern.json";    
         let read = std::fs::write(&filename, serde_json::to_string_pretty(&self)?)?;
         //al usar ? hacemos que Rust automáticamente gestione el procesado de los errores, en este caso, tanto serde_jason como write deben llevar uno cada uno
-        //en caso contrario, debería usar el código abajo escrito
+        //en caso contrario, debería usar
         /*match read {
             Ok(_) => println!("\nwriting of {} is successful", filename.to_uppercase()),
             Err(_) => println!("\nwriting has failed"),

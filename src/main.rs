@@ -1,11 +1,8 @@
-use crate::heroes::*;
-use crate::tavern::*;
-
-mod heroes;
-mod tavern;
+use character_creator::{heroes::{Hero, say_name}, tavern::Tavern};
 
 fn main() {
 
+    env_logger::init();
     //Creador chorra de personajes en Rust
     let first_hero = Hero::new("Thrall", "orc", "hammer", "warrior");
     let second_hero = Hero::new("Drizzt", "elf", "daggers", "rogue");
@@ -35,7 +32,7 @@ fn main() {
     dark_tavern.show_heroes();
 
     //Echamos a uno de los héroes porque siempre gorronea (incluso incluimos motivos!)
-    dark_tavern.kick_hero("Althael", "Gorronear y nunca pagar");
+    dark_tavern.kick_hero("Anthonio", "Gorronear y nunca pagar");
 
     //Mostramos que de verdad ha sido echado de la taberna
     dark_tavern.show_heroes();

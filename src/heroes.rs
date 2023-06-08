@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use log::{info, warn, error};
  
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Race {
@@ -100,6 +101,9 @@ impl Hero {
 
         let (hp, mana) = check_class(&class);
 
+        //log de creación del personaje
+        info!("The hero {} has been created", &name);
+
         Self {
             name: String::from(name),
             race: enum_race,
@@ -108,6 +112,7 @@ impl Hero {
             hp,
             mana,
         }
+        
     }
 
     pub fn describe(&self) {

@@ -1,5 +1,6 @@
-use std::{io};
+use std::{io, error};
 use serde::Serialize;
+use log::{info, warn, error};
 
 use crate::heroes::*;
 
@@ -11,13 +12,16 @@ pub struct Tavern {
 
 impl Tavern {
     pub fn new(name: &str) -> Self {
+
+        info!("Created the tavern -> {}", &name.to_uppercase());
         Self {
             name: String::from(name),
             heroes: Vec::new(),
         }
     }
 
-    pub fn add(&mut self, hero: Hero) {
+    pub fn add(&mut self, hero: Hero) {        
+        info!("Added the hero {:#?}", &hero);
         self.heroes.push(hero);
     }
 
@@ -39,16 +43,21 @@ impl Tavern {
         //genio de idea
         //update: usando un Option, devolvemos la posición con un Some(usize) y en caso contrario con un None, evitando panics
         //update 2: usamos una función para que la lectura sea aún más sencilla
+        info!("Searching for -> {}", &name.to_uppercase());
         let find_hero: Option<usize> = self.find_hero(name);
 
         //Usamos un match para devolver un resultado u otro dependiendo de si encuentra algo o no, pero evitando el
         //código haciendo PANIC
         match find_hero {
             Some(usize) => {
+                info!("Success! Hero was found!");
                 self.heroes.remove(usize);
                 println!("\nEl héroe {} ha sido echado por: {}\n", name, kick_motive);
                 },
-            None => println!("No existe un héroe con ese nombre"),
+            None => {
+                error!("Error, hero couldn't be found");
+                println!("No existe un héroe con ese nombre");
+                }
         };
     }
 

@@ -1,6 +1,6 @@
-use std::{io, error};
+use std::io;
 use serde::Serialize;
-use log::{info, warn, error};
+use log::{info, error};
 
 use crate::heroes::*;
 

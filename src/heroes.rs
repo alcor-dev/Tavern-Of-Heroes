@@ -1,5 +1,5 @@
 use serde::{Serialize, Deserialize};
-use log::{info, warn, error};
+use log::info;
  
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub enum Race {

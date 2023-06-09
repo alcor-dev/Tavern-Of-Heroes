@@ -1,4 +1,6 @@
-use character_creator::{heroes::{Hero, say_name}, tavern::{Tavern}, read_json_tavern, check_file};
+use character_creator::
+    {heroes::{Hero, say_name}, 
+    tavern::{Tavern}, read_json_tavern, check_file, send_vec_to_postgres, create_table};
 use log::{info, error, LevelFilter};
 use env_logger::{filter, Builder};
 
@@ -22,6 +24,7 @@ fn main() {
 
         error!("The file with the name {} couldn't be found",&arg.to_uppercase());
         println!("The original file {} couldn't be found so there will be another one created", &arg.to_uppercase());
+        
         //Creador chorra de personajes en Rust
         let first_hero = Hero::new("Thrall", "orc", "hammer", "warrior");
         let second_hero = Hero::new("Drizzt", "elf", "daggers", "rogue");
@@ -30,6 +33,7 @@ fn main() {
         let fifth_hero = Hero::new("Elizabeth", "elf", "scepter", "healer");
 
         println!("{:#?}", &first_hero);
+
 
         //Muestra la info del personaje elegido
         first_hero.describe();    
@@ -44,6 +48,14 @@ fn main() {
         dark_tavern.add(fourth_hero);
         dark_tavern.add(fifth_hero);
 
+        //Creamos unos métodos que nos permitan salvar la información 
+        //en una base de datos, en este caso: POSTGRES
+        //primero creando la tabla
+        /*create_table();*/
+
+        //Después guardando los personajes dentro de la tabla mediante queries
+        send_vec_to_postgres(&dark_tavern);
+        
         //Creador automático de personajes
         dark_tavern.create_characters();
 

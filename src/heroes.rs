@@ -1,4 +1,5 @@
 use serde::{Serialize, Deserialize};
+use postgres::{Client, NoTls};
 use log::info;
  
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
@@ -157,6 +158,47 @@ impl Hero {
     pub fn get_hero_name(&self) -> String {
         let Hero{name, ..} = self;
         String::from(name)
+    }
+
+        
+    pub fn send_to_postgres(&self) {
+        let mut client = Client::connect("host=localhost user=postgres password=contrasena dbname=rust", NoTls).expect("Connection Error");
+
+        let race_txt = match self.race {
+            Race::Demon => String::from("Demon"),
+            Race::Elf => String::from("Elf"),
+            Race::Human => String::from("Human"),
+            Race::Orc => String::from("Orc"),
+            Race::Dwarf => String::from("Dwarf"),
+            Race::Goblin => String::from("Goblin")
+        };
+
+        let weapon_txt = match self.weapon {
+            Weapon::Daggers => String::from("Daggers"),
+            Weapon::Hands => String::from("Hands"),
+            Weapon::Hammer => String::from("Hammer"),
+            Weapon::Mace => String::from("Mace"),
+            Weapon::Magic => String::from("Magic"),
+            Weapon::Spear => String::from("Spear"),
+            Weapon::Sword => String::from("Sword"),
+            Weapon::Scepter => String::from("Scepter")
+            
+        };
+
+        let class_txt = match self.class {
+            Class::Mage => String::from("Mage"),
+            Class::Nechromancer => String::from("Nechromancer"),
+            Class::Rogue => String::from("Rogue"),
+            Class::Warrior => String::from("Warrior"),
+            Class::Fighter => String::from("Fighter"),
+            Class::Karate => String::from("Karate Master"),
+            Class::Healer => String::from("Healer")
+        };
+
+        client.execute(
+            "INSERT INTO heroes (name, race, weapon, class) VALUES ($1, $2, $3, $4)",
+            &[&self.name, &race_txt, &weapon_txt, &class_txt]
+        ).expect("Data not inserted");
     }
 
 }

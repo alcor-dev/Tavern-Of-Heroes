@@ -1,10 +1,10 @@
 use std::io;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 use log::{info, error};
 
 use crate::heroes::*;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Tavern {
     name: String,
     pub heroes: Vec<Hero>,
@@ -121,4 +121,6 @@ impl Tavern {
 
         };   
     }
+
+    
 }

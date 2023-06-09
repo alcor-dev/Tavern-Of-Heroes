@@ -50,13 +50,13 @@ impl Tavern {
         //código haciendo PANIC
         match find_hero {
             Some(usize) => {
-                info!("Success! Hero was found!");
+                info!("SUCCESS! Hero {} was found! Proceeding to kicking it out!", &name.to_uppercase());
                 self.heroes.remove(usize);
-                println!("\nEl héroe {} ha sido echado por: {}\n", name, kick_motive);
+                println!("\nHero {} kicked due to: {}\n", name, kick_motive);
                 },
             None => {
-                error!("Error, hero couldn't be found");
-                println!("No existe un héroe con ese nombre");
+                error!("Error, hero {} couldn't be found", &name.to_uppercase());
+                println!("There's not a hero with that name");
                 }
         };
     }
@@ -86,10 +86,12 @@ impl Tavern {
         let mut counter: u32 = 1;
     
         println!("Introduce number of heroes to be made: ");
+        
         let mut number_heroes = String::new();
         io::stdin().read_line(&mut number_heroes).expect("Error");
     
         let number_heroes = number_heroes.trim().parse::<u32>().expect("Error doing parsing");
+        info!("The number of heroes to be made is: {}", &number_heroes);
     
         loop {
 
@@ -120,7 +122,5 @@ impl Tavern {
             counter += 1;
 
         };   
-    }
-
-    
+    }    
 }

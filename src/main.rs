@@ -1,9 +1,10 @@
 use character_creator::{heroes::{Hero, say_name}, tavern::{Tavern}, read_json_tavern, check_file};
-use log::{info, error};
+use log::{info, error, LevelFilter};
+use env_logger::{filter, Builder};
 
 fn main() {
 
-    env_logger::init();
+    Builder::new().filter(None, LevelFilter::Info).init();
 
     let path: Vec<String> = std::env::args().collect();
     let arg = path[1].as_str();
@@ -50,7 +51,7 @@ fn main() {
         dark_tavern.show_heroes();
 
         //Echamos a uno de los héroes porque siempre gorronea (incluso incluimos motivos!)
-        dark_tavern.kick_hero("Anthonio", "Gorronear y nunca pagar");
+        dark_tavern.kick_hero("Myst", "Desgaste de bailes coreanos");
 
         //Mostramos que de verdad ha sido echado de la taberna
         dark_tavern.show_heroes();
@@ -63,8 +64,5 @@ fn main() {
 
         //Creamos un archivo con los héroes de la taberna
         dark_tavern.write_json_tavern().expect("Error");
-        }
-
-    
-
+    }
 }

@@ -51,7 +51,7 @@ fn main() {
         dark_tavern.show_heroes();
 
         //Echamos a uno de los héroes porque siempre gorronea (incluso incluimos motivos!)
-        dark_tavern.kick_hero("Myst", "Desgaste de bailes coreanos");
+        dark_tavern.kick_hero("Althael", "Gorronear y nunca pagar");
 
         //Mostramos que de verdad ha sido echado de la taberna
         dark_tavern.show_heroes();

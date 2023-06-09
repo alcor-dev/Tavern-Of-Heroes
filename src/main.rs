@@ -2,7 +2,7 @@ use character_creator::
     {heroes::{Hero, say_name}, 
     tavern::{Tavern}, read_json_tavern, check_file, send_vec_to_postgres, create_table};
 use log::{info, error, LevelFilter};
-use env_logger::{filter, Builder};
+use env_logger::{Builder};
 
 fn main() {
 
@@ -51,7 +51,7 @@ fn main() {
         //Creamos unos métodos que nos permitan salvar la información 
         //en una base de datos, en este caso: POSTGRES
         //primero creando la tabla
-        /*create_table();*/
+        create_table();
 
         //Después guardando los personajes dentro de la tabla mediante queries
         send_vec_to_postgres(&dark_tavern);
@@ -60,19 +60,19 @@ fn main() {
         dark_tavern.create_characters();
 
         //Pedimos que muestre los personajes con un formateo propio
-        dark_tavern.show_heroes();
+        //dark_tavern.show_heroes();
 
         //Echamos a uno de los héroes porque siempre gorronea (incluso incluimos motivos!)
         dark_tavern.kick_hero("Althael", "Gorronear y nunca pagar");
 
         //Mostramos que de verdad ha sido echado de la taberna
-        dark_tavern.show_heroes();
+        //dark_tavern.show_heroes();
 
         //uso de función genérica para llamar a todos los structs con el trait Nameable [ver heroes.rs]
         //update: usando clone, podemos hacer una copia que se consuma en lugar del original
         say_name(dark_tavern.heroes[0].clone());
 
-        println!("{:#?}", dark_tavern);
+        //println!("{:#?}", dark_tavern);
 
         //Creamos un archivo con los héroes de la taberna
         dark_tavern.write_json_tavern().expect("Error");

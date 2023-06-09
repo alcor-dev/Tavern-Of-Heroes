@@ -195,6 +195,7 @@ impl Hero {
             Class::Healer => String::from("Healer")
         };
 
+        //El uso de una query con $ y números sucesivos ayuda a evitar inyecciones de SQL con malas intenciones
         client.execute(
             "INSERT INTO heroes (name, race, weapon, class) VALUES ($1, $2, $3, $4)",
             &[&self.name, &race_txt, &weapon_txt, &class_txt]

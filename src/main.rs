@@ -1,6 +1,6 @@
 use character_creator::
     {heroes::{Hero, say_name}, 
-    tavern::{Tavern}, read_json_tavern, check_file, send_vec_to_postgres, create_table};
+    tavern::{Tavern}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database};
 use log::{info, error, LevelFilter};
 use env_logger::{Builder};
 
@@ -54,8 +54,14 @@ fn main() {
         create_table();
 
         //Después guardando los personajes dentro de la tabla mediante queries
-        send_vec_to_postgres(&dark_tavern);
-        
+        send_to_database(&dark_tavern);
+
+        //Leer de base de datos
+        read_everything();
+
+        //Busca un resultado determinado
+        search_in_table("Myst");
+
         //Creador automático de personajes
         dark_tavern.create_characters();
 

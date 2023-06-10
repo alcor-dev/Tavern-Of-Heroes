@@ -39,7 +39,17 @@ pub fn create_table() {
         race    TEXT NOT NULL,
         weapon  TEXT NOT NULL,
         class   TEXT NOT NULL)").expect("Error creating table");
+
     info!("The table HEROES has been created!");
+}
+
+pub fn drop_table() {
+
+    let mut client = Client::connect("host=localhost user=postgres password=contrasena dbname=rust", NoTls).expect("Connection Error");
+    
+    client.execute("DROP TABLE heroes", &[]).expect("Error dropping table");
+
+    info!("Deleting the table HEROES");    
 }
 
 pub fn read_everything() {

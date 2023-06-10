@@ -1,6 +1,6 @@
 use character_creator::
     {heroes::{Hero, say_name}, 
-    tavern::{Tavern}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database};
+    tavern::{Tavern}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database, drop_table};
 use log::{info, error, LevelFilter};
 use env_logger::{Builder};
 
@@ -82,5 +82,8 @@ fn main() {
 
         //Creamos un archivo con los héroes de la taberna
         dark_tavern.write_json_tavern().expect("Error");
+
+        //Destruyendo la tabla necesaria
+        drop_table();
     }
 }

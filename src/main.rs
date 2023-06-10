@@ -6,8 +6,11 @@ use env_logger::{Builder};
 
 fn main() {
 
+    //Generación del logger donde no tiene limitacionees y el filtro ha sido configurado para mostrar
+    //los avisos de menor nivel también y comprobar que funciona
     Builder::new().filter(None, LevelFilter::Info).init();
 
+    //Recoge los argumentos usados al iniciar el programa y los usa para configurar a qué archivo JSON acceder
     let path: Vec<String> = std::env::args().collect();
     let arg = path[1].as_str();
     
@@ -51,10 +54,12 @@ fn main() {
         //Creamos unos métodos que nos permitan salvar la información 
         //en una base de datos, en este caso: POSTGRES
         //primero creando la tabla
+        //EDIT: ahora no crashea pues tiene una cláusula en la query que si otra tabla con el
+        //mismo nombre aparece, no haga nada
         create_table();
 
         //Después guardando los personajes dentro de la tabla mediante queries
-        send_to_database(&dark_tavern);
+        //send_to_database(&dark_tavern);
 
         //Leer de base de datos
         read_everything();
@@ -76,7 +81,7 @@ fn main() {
 
         //uso de función genérica para llamar a todos los structs con el trait Nameable [ver heroes.rs]
         //update: usando clone, podemos hacer una copia que se consuma en lugar del original
-        say_name(dark_tavern.heroes[0].clone());
+        //say_name(dark_tavern.heroes[0].clone());
 
         //println!("{:#?}", dark_tavern);
 
@@ -84,6 +89,8 @@ fn main() {
         dark_tavern.write_json_tavern().expect("Error");
 
         //Destruyendo la tabla necesaria
-        drop_table();
+        //Manteniendo esto activado junto con la creación de tablas se produce un efecto muy tipo
+        //drop-create en bootspring al configurar todo
+        /*drop_table();*/
     }
 }

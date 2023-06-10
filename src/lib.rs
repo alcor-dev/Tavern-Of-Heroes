@@ -80,6 +80,7 @@ pub fn search_in_table(name: &str) {
     let mut client = Client::connect("host=localhost user=postgres password=contrasena dbname=rust", NoTls).expect("Connection Error");
 
     let mut results: Vec<(i32, String, String, String, String)> = Vec::new();
+    let mut counter :i32 = 1;
     
 
     for row in client.query("SELECT * FROM heroes WHERE name = $1", &[&name]).expect("Error") {
@@ -90,10 +91,19 @@ pub fn search_in_table(name: &str) {
         let weapon: String = row.get(3);
         let class: String = row.get(4);
 
-        info!("Found hero {} data! Reading from Database", &name.to_uppercase());
+        
         results.push((id, name, race, weapon,class));
+
+        counter += 1;
     };
 
+    info!("Found hero {}! | {} instance(s) | Retrieving data from database", &name.to_uppercase(), results.len());
     info!("Printing the search made with -> {}", &name.to_uppercase());
-    println!("{:#?}", results);
+
+    if results.len() > 0 {
+        println!("{:#?}", results);
+    } else {
+        info!("No instances of {} were found", &name.to_uppercase());
+    }
+    
 }

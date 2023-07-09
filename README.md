@@ -13,6 +13,7 @@ La creación del programa me ha ayudado en gran medida a entender el funcionamie
 
 Intento ir incorporando la mayor cantidad posible de características que sean coherentes con la idea y todavía tengo un par pendientes que me gustaría realizar para sentir que puedo darle carpetazo final al proyecto:
 
-- [X] Ser capaz de cargar desde el inicio un JSON para crear de nuevo la "base de datos" y modificarla como se desee (HECHO)
-- [X] Creación de conexiones a bases de datos: quizás a contenedores docker con PostgresSQL o MySQL (HECHO)
+- [X] Ser capaz de cargar desde el inicio un JSON para crear de nuevo la "base de datos" y modificarla como se desee.
+- [X] Creación de conexiones a bases de datos: quizás a contenedores docker con PostgresSQL o MySQL.
+- [X] Integrado sistema de TUI con opciones básicas y poco a poco más introducción de features manipulables con el programa.
 - [ ] Ideas que vayan surgiendo al ir teniendo mayor dominio del lenguaje y avance en mis experimentos sueltos.

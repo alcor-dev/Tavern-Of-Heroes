@@ -108,7 +108,10 @@ fn show_next(siv: &mut Cursive) {
     let mut select: SelectView<Hero> = SelectView::new().h_align(HAlign::Center).autojump();
     let buttons = LinearLayout::vertical()
         // .child(Button::new("Add new", add_hero))
+        .child(Button::new("Test", Cursive::noop))
+        .child(DummyView)
         .child(Button::new("Quit", Cursive::quit));
+    
     for hero in data.heroes.iter() {
         select.add_item(&hero.get_hero_name(), hero.clone());
     }

@@ -58,10 +58,6 @@ fn check_class(class: &str) -> (u64, u64) {
     }
 }
 
-pub trait Nameable {
-    fn nameable(&self) -> &str;
-}
-
 impl Hero {
     pub fn new(name: &str, race: &str, weapon: &str, class: &str) -> Self {
         
@@ -160,6 +156,60 @@ impl Hero {
         String::from(name)
     }
 
+    pub fn get_race(&self) -> String {
+
+        let race = match self.race {
+            Race::Demon => String::from("Demon"),
+            Race::Elf => String::from("Elf"),
+            Race::Human => String::from("Human"),
+            Race::Orc => String::from("Orc"),
+            Race::Dwarf => String::from("Dwarf"),
+            Race::Goblin => String::from("Goblin")
+        };
+
+        String::from(race)
+    }
+
+    pub fn get_weapon(&self) -> String {
+
+        let weapon = match self.weapon {
+            Weapon::Daggers => String::from("Daggers"),
+            Weapon::Hands => String::from("Hands"),
+            Weapon::Hammer => String::from("Hammer"),
+            Weapon::Mace => String::from("Mace"),
+            Weapon::Magic => String::from("Magic"),
+            Weapon::Spear => String::from("Spear"),
+            Weapon::Sword => String::from("Sword"),
+            Weapon::Scepter => String::from("Scepter")
+            
+        };
+
+        String::from(weapon)
+    }
+
+    pub fn get_class(&self) -> String {
+
+        let class = match self.class {
+            Class::Mage => String::from("Mage"),
+            Class::Nechromancer => String::from("Nechromancer"),
+            Class::Rogue => String::from("Rogue"),
+            Class::Warrior => String::from("Warrior"),
+            Class::Fighter => String::from("Fighter"),
+            Class::Karate => String::from("Karate Master"),
+            Class::Healer => String::from("Healer")
+        };
+
+        String::from(class)
+    }
+
+    pub fn get_hp(&self) -> u64 {
+        self.hp
+    }
+
+    pub fn get_mana(&self) -> u64 {
+       self.mana 
+    }
+
         
     pub fn send_to_postgres(&self) {
         let mut client = Client::connect("host=localhost user=postgres password=contrasena dbname=rust", NoTls).expect("Connection Error");
@@ -202,6 +252,10 @@ impl Hero {
         ).expect("Data not inserted");
     }
 
+}
+
+pub trait Nameable {
+    fn nameable(&self) -> &str;
 }
 
 //Añadimos el trait nameable a la struct Hero

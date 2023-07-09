@@ -13,6 +13,12 @@ pub fn read_json_tavern(path: &str) {
     println!("{:#?}", final_json);
 }
 
+pub fn json_to_program(path: &str) -> Tavern {
+    let file = std::fs::read_to_string(path).expect("Error reading file");
+    let return_tavern: Tavern = serde_json::from_str(&file).expect("Error deserializing JSON");
+    return_tavern
+}
+
 pub fn check_file(path: &str) -> bool {
     let result = File::open(path);
 

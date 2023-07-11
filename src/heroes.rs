@@ -46,7 +46,7 @@ pub struct Hero {
 }
 
 fn check_class(class: &str) -> (u64, u64) {
-    match class {
+    match class.to_lowercase().as_str() {
         "healer" => (200, 3000),
         "mage" => (250, 1000),
         "warrior" => (1000, 100),
@@ -54,7 +54,7 @@ fn check_class(class: &str) -> (u64, u64) {
         "nechromancer" => (100, 1000),
         "karate" => (5000, 0),
         "fighter" => (2000, 50),
-        &_ => (0,0),
+        &_ => (9999, 9999),
     }
 }
 

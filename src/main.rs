@@ -2,10 +2,10 @@ use std::rc::Rc;
 
 use character_creator::
     {
-        heroes::{Hero, say_name}, 
-        tavern::{Tavern, self}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database, drop_table, json_to_program
+        classes::heroes::{Hero, say_name}, 
+        classes::tavern::{Tavern, self, KickMotive}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database, drop_table, json_to_program
     };
-use cursive::{Cursive, views::{Dialog, TextView, SelectView, LinearLayout, Button, DummyView, EditView, ListView, TextArea}, CursiveExt, align::{HAlign, Align}, view::{Scrollable, Resizable, Nameable}, event::Key};
+use cursive::{Cursive, views::{Dialog, TextView, SelectView, LinearLayout, Button, DummyView, EditView, ListView, TextArea}, CursiveExt, align::{HAlign, Align}, view::{Scrollable, Resizable, Nameable, Finder}, event::Key};
 use log::{info, error, LevelFilter};
 use env_logger::{Builder};
 
@@ -32,7 +32,7 @@ fn main() {
         println!("The file {} has been found", &arg.to_uppercase());
         read_json_tavern(arg);
         let tavern_vec = json_to_program(arg);
-        siv.add_layer(Dialog::around(TextView::new("Meet your heroes")).title("Dark Tavern").button("Next", show_next));
+        siv.add_layer(Dialog::around(TextView::new("Meet your heroes")).title("Dark Tavern").button("Next", main_menu));
 
     } else {
 
@@ -107,13 +107,13 @@ fn main() {
 
 }
 
-fn show_next(siv: &mut Cursive) {
+fn main_menu(siv: &mut Cursive) {
     let data = json_to_program("dark_tavern.json");
     let mut select: SelectView<Hero> = SelectView::new().h_align(HAlign::Center).autojump();
     let buttons = LinearLayout::vertical()
         // .child(Button::new("Add new", add_hero))
         .child(Button::new("Add new hero", add_hero))
-        .child(Button::new("Remove hero", not_implemented))
+        .child(Button::new("Remove hero", delete_hero))
         .child(DummyView)
         .child(Button::new("Quit", Cursive::quit));
     
@@ -133,7 +133,7 @@ fn show_next(siv: &mut Cursive) {
 
 fn show_hero(siv: &mut Cursive, hero: &Hero) {
     let text = format!("Name: {}\nRace: {}\nWeapon: {}\nClass: {}\nHp: {}\nMana: {}", hero.get_hero_name(), hero.get_race(), hero.get_weapon(), hero.get_class(), hero.get_hp(), hero.get_mana());
-    siv.add_layer(Dialog::around(TextView::new(text)).button("Back", show_next).title(hero.get_hero_name()));
+    siv.add_layer(Dialog::around(TextView::new(text)).button("Back", main_menu).title(hero.get_hero_name()));
 
 }
 
@@ -179,7 +179,6 @@ fn test(s: &mut Cursive) {
 }
 
 fn show_final_data(s: &mut Cursive, hero: Hero) {
-    let hp = &hero.get_hp();
     s.pop_layer();
     s.add_layer(Dialog::new().title("DATA HERO CREATED!")
         .content(ListView::new()
@@ -220,7 +219,7 @@ fn save_data(siv: &mut Cursive, hero: Hero) {
     tavern.write_json_tavern();
 
     siv.pop_layer();
-    siv.add_layer(Dialog::new().title("DATA SAVED!").content(TextView::new("The hero you just created has been saved!")).button("Back", show_next));
+    siv.add_layer(Dialog::new().title("DATA SAVED!").content(TextView::new("The hero you just created has been saved!")).button("Back", main_menu));
     
 }
 
@@ -246,4 +245,47 @@ fn show_race(siv: &mut Cursive, race: &str) {
 
 fn not_implemented(siv: &mut Cursive) {
     siv.add_layer(Dialog::around(TextView::new("Not implemented yet").content("Feature not implemented yet")).dismiss_button("Back"));
+}
+
+fn delete_hero(siv: &mut Cursive) {
+    siv.pop_layer();
+    siv.add_layer(Dialog::new().title("Deleting hero")
+                .content(
+                    ListView::new()
+                        .child(
+                            "Issue a ban -> ",
+                            TextView::new("Add the data to justify the kick\n")
+                        )
+                        .child(
+                            "",
+                            TextView::new(" ")
+                        )
+                        .child(
+                            "Name: ",
+                            EditView::new().with_name("name")
+                        )
+                        .child(
+                            "Kick motive: ",
+                            EditView::new().with_name("kick_motive")
+                        )
+                        ,
+                ).button("Continue", |s| {
+                    let name = s.call_on_name("name", |t: &mut EditView| t.get_content());
+                    let kick_motive = s.call_on_name("kick_motive", |t: &mut EditView| t.get_content());
+
+                    let ban = KickMotive::new(&name.unwrap_or_default(), &kick_motive.unwrap_or_default());
+
+                    show_delete(s, ban)
+                }));
+}
+
+fn show_delete(siv: &mut Cursive, km: KickMotive) {
+    let mut tavern = json_to_program("dark_tavern.json");
+    tavern.kick_hero(km.get_name(), km.get_kick_motive());
+    tavern.write_json_tavern();
+
+    let kick_final = format!("Hero {} has been kicked due to {}", km.get_name(), km.get_kick_motive());
+
+    siv.pop_layer();
+    siv.add_layer(Dialog::around(TextView::new(kick_final)).title("DELETING HEROE").button("Ok", main_menu));   
 }

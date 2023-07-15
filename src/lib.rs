@@ -1,10 +1,11 @@
 use std::{fs::File};
 use log::{info, error};
 use postgres::{Client, NoTls, Row, error};
-use tavern::Tavern;
+use classes::{
+    heroes,
+    tavern::Tavern};
 
-pub mod heroes;
-pub mod tavern;
+pub mod classes;
 
 pub fn read_json_tavern(path: &str) {
     let file = std::fs::read_to_string(path).expect("Error reading file");

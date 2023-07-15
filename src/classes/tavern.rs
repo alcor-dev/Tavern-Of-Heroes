@@ -2,7 +2,30 @@ use std::io;
 use serde::{Serialize, Deserialize};
 use log::{info, error};
 
-use crate::heroes::*;
+use crate::heroes::{Hero};
+
+pub struct KickMotive {
+    name: String,
+    kick_motive: String,
+}
+
+impl KickMotive {
+    pub fn new(name: &str, kick_motive: &str) -> Self {
+        Self{
+            name: String::from(name),
+            kick_motive: String::from(kick_motive),
+        }
+    }
+
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn get_kick_motive(&self) -> &str {
+        &self.kick_motive
+    }
+}
+
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Tavern {

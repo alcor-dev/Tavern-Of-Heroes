@@ -1,6 +1,6 @@
 use criterion::{criterion_group, criterion_main, Criterion};
 
-use character_creator::{ classes::tavern::Tavern, classes::heroes::Hero};
+use tavern_of_heroes::{ classes::tavern::Tavern, classes::heroes::Hero};
 
 
 pub fn creation_benchmark_iter(c: &mut Criterion) {

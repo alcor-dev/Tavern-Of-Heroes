@@ -2,7 +2,7 @@ use std::rc::Rc;
 
 use tavern_of_heroes::
     {
-        classes::heroes::{Hero, say_name}, 
+        classes::heroes::{Hero, say_name},
         classes::tavern::{Tavern, self, KickMotive}, read_json_tavern, check_file, create_table, read_everything, search_in_table, send_to_database, drop_table, json_to_program
     };
 use cursive::{Cursive, views::{Dialog, TextView, SelectView, LinearLayout, Button, DummyView, EditView, ListView, TextArea}, CursiveExt, align::{HAlign, Align}, view::{Scrollable, Resizable, Nameable, Finder}, event::Key};
@@ -11,7 +11,7 @@ use env_logger::{Builder};
 
 fn main() {
 
-    //Generación del logger donde no tiene limitacionees y el filtro ha sido configurado para mostrar
+    //Generación del logger donde no tiene limitaciones y el filtro ha sido configurado para mostrar
     //los avisos de menor nivel también y comprobar que funciona
     Builder::new().filter(None, LevelFilter::Info).init();
 
